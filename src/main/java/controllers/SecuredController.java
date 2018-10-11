@@ -36,6 +36,5 @@ public class SecuredController extends HttpServlet {
         } catch (EJBAccessException e) {
             resp.getWriter().println("You need to be at least admin to see the msg");
         }
-
     }
 }

@@ -1,16 +1,9 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: matma
-  Date: 11.10.2018
-  Time: 13:11
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
-  <head>
-    <title>$Title$</title>
-  </head>
-  <body>
-<a href="/secure"> Login here</a>
-  </body>
+<head>
+    <title>Main page</title>
+</head>
+<body>
+<a href="${pageContext.request.contextPath}/secure"> Login here</a>
+</body>
 </html>
