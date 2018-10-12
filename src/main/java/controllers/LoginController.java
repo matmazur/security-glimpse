@@ -34,7 +34,7 @@ public class LoginController extends HttpServlet {
         List<User> users = userRepository.findAll();
 
         Optional<User> user = users.stream().filter(x -> x.getUsername().equals(login)).findAny();
-        if (user.get().getPassword().equals(pass)) {
+        if (user.isPresent()&& user.get().getPassword().equals(pass)) {
 
             response.getWriter().println("This is secured area, welcome " + user.get().getUsername());
 
