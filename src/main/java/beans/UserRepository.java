@@ -2,11 +2,11 @@ package beans;
 
 import model.User;
 
-import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-@Stateless
+@RequestScoped
 public class UserRepository {
 
     @PersistenceContext
