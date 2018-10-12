@@ -22,7 +22,6 @@ public class User {
     @Column(name = "role")
     private Set<String> roles = new HashSet<>();
 
-
     public User(String username, String password, String role) {
         this.username = username;
         this.password = password;

@@ -7,7 +7,6 @@ import javax.ejb.Stateless;
 @RolesAllowed("admin")
 public class SecuredBean {
 
-
     public String getMessage() {
         return "Secured Message no. " + System.currentTimeMillis();
     }
