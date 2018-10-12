@@ -15,5 +15,4 @@ http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
         </properties>
     </persistence-unit>
 
-
 </persistence>
