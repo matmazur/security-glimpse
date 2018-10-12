@@ -1,6 +1,8 @@
 package controllers;
 
 import beans.SecuredBean;
+import beans.UserRepository;
+import model.User;
 
 import javax.ejb.EJBAccessException;
 import javax.inject.Inject;
@@ -20,21 +22,18 @@ import java.security.Principal;
 public class SecuredController extends HttpServlet {
 
     @Inject
-    SecuredBean securedBean;
+    UserRepository repository;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        Principal principal = req.getUserPrincipal();
-        String name = principal.getName();
+        String username = req.getParameter("username");
+        String password = req.getParameter("password");
+        String role = req.getParameter("role");
 
-        resp.getWriter().println("secured area, hello " + name);
-        try {
-            String msg = securedBean.getMessage();
-            resp.getWriter().println(msg);
+        User user = new User(username,password,role);
+        repository.add(user);
+        resp.sendRedirect(req.getContextPath());
 
-        } catch (EJBAccessException e) {
-            resp.getWriter().println("You need to be at least admin to see the msg");
-        }
     }
 }
