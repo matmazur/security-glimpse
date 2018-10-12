@@ -2,11 +2,13 @@ package beans;
 
 import model.User;
 
-import javax.enterprise.context.RequestScoped;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import java.util.List;
 
-@RequestScoped
+@Stateless
 public class UserRepository {
 
     @PersistenceContext
@@ -14,5 +16,11 @@ public class UserRepository {
 
     public void add(User user) {
         entityManager.persist(user);
+    }
+
+    public List findAll() {
+        Query query = entityManager.createQuery("Select u FROM User u");
+
+        return query.getResultList();
     }
 }
