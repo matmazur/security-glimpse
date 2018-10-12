@@ -30,15 +30,14 @@ public class LoginController extends HttpServlet {
         String login = request.getParameter("login");
         String pass = request.getParameter("password");
 
+        User user = userRepository.findUserByUsername(login);
 
-        List<User> users = userRepository.findAll();
 
-        Optional<User> user = users.stream().filter(x -> x.getUsername().equals(login)).findAny();
-        if (user.isPresent()&& user.get().getPassword().equals(pass)) {
+        if (user.getPassword().equals(pass)) {
 
-            response.getWriter().println("This is secured area, welcome " + user.get().getUsername());
+            response.getWriter().println("This is secured area, welcome " + user.getUsername());
 
-            if (user.get().getRoles().contains("admin")) {
+            if (user.getRoles().contains("admin")) {
                 response.getWriter().println("Secured Message no. " + System.currentTimeMillis());
             } else {
                 response.getWriter().println("Sorry, you are not allowed to show secret message");
