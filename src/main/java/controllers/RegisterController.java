@@ -27,14 +27,8 @@ public class RegisterController extends HttpServlet {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
         String role = req.getParameter("role");
-        password =Salt.salter(password);
-        password= Hashing
-                .sha256()
-                .hashString(password, StandardCharsets.UTF_8)
-                .toString();
 
-
-        User user = new User(username, password, role);
+        User user = new User(username, Salt.saltAndHash(password), role);
         repository.add(user);
         resp.sendRedirect(req.getContextPath());
 

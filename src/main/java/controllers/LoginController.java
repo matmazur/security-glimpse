@@ -2,6 +2,7 @@ package controllers;
 
 import beans.UserRepository;
 import model.User;
+import utils.Salt;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -20,10 +21,10 @@ public class LoginController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String login = request.getParameter("login");
-        String pass = request.getParameter("password");
+        String pass = Salt.saltAndHash(request.getParameter("password"));
         User user = null;
 
-        if (userRepository.findUserByUsername(login).get(0) != null) {
+        if (userRepository.findUserByUsername(login).size()>0) {
             user = userRepository.findUserByUsername(login).get(0);
         }
         if (user != null && user.getPassword().equals(pass)) {

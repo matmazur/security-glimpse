@@ -14,9 +14,9 @@ public class Salt {
     private Salt() {
     }
 
-    public static String salter(String string) {
+    public static String saltAndHash(String string) {
 
-        return PRE + string + POST;
+        return hasher(PRE + string + POST);
     }
 
     private static String hasher(String string) {
