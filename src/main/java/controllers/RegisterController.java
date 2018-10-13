@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.security.MessageDigest;
 
 @WebServlet("/register")
 public class RegisterController extends HttpServlet {
@@ -24,8 +25,10 @@ public class RegisterController extends HttpServlet {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
         String role = req.getParameter("role");
+        password =Salt.salter(password);
 
-        User user = new User(username, Salt.salter(password), role);
+
+        User user = new User(username, password, role);
         repository.add(user);
         resp.sendRedirect(req.getContextPath());
 
