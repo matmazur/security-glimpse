@@ -2,6 +2,7 @@ package controllers;
 
 import beans.UserRepository;
 import model.User;
+
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,10 +21,12 @@ public class LoginController extends HttpServlet {
 
         String login = request.getParameter("login");
         String pass = request.getParameter("password");
+        User user = null;
 
-        User user = userRepository.findUserByUsername(login);
-
-        if (user.getPassword().equals(pass)) {
+        if (userRepository.findUserByUsername(login).get(0) != null) {
+            user = userRepository.findUserByUsername(login).get(0);
+        }
+        if (user != null && user.getPassword().equals(pass)) {
 
             response.getWriter().println("This is secured area, welcome " + user.getUsername());
 

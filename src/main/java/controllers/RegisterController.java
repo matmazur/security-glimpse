@@ -1,6 +1,7 @@
 package controllers;
 
 import beans.UserRepository;
+import com.google.common.hash.Hashing;
 import model.User;
 import utils.Salt;
 
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 
 @WebServlet("/register")
@@ -26,6 +28,10 @@ public class RegisterController extends HttpServlet {
         String password = req.getParameter("password");
         String role = req.getParameter("role");
         password =Salt.salter(password);
+        password= Hashing
+                .sha256()
+                .hashString(password, StandardCharsets.UTF_8)
+                .toString();
 
 
         User user = new User(username, password, role);

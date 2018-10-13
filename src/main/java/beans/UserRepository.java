@@ -23,10 +23,10 @@ public class UserRepository {
 
         return query.getResultList();
     }
-    public User findUserByUsername(String string) {
+    public List<User> findUserByUsername(String string) {
 
         TypedQuery<User> query = entityManager.createQuery("Select u FROM User u Where u.username=?1", User.class);
 
-        return query.setParameter(1, string).getResultList().get(0);
+        return query.setParameter(1, string).getResultList();
     }
 }

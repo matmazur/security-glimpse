@@ -1,5 +1,9 @@
 package utils;
 
+import com.google.common.hash.Hashing;
+
+import java.nio.charset.StandardCharsets;
+
 public class Salt {
 
     private static final String PRE = "SDtge4534%$#TrSA";
@@ -13,5 +17,13 @@ public class Salt {
     public static String salter(String string) {
 
         return PRE + string + POST;
+    }
+
+    private static String hasher(String string) {
+
+        return Hashing
+                .sha256()
+                .hashString(string, StandardCharsets.UTF_8)
+                .toString();
     }
 }
