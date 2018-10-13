@@ -20,13 +20,11 @@ public class UserRepository {
 
     public List<User> findAll() {
         TypedQuery<User> query = entityManager.createQuery("Select u FROM User u", User.class);
-
         return query.getResultList();
     }
+
     public List<User> findUserByUsername(String string) {
-
         TypedQuery<User> query = entityManager.createQuery("Select u FROM User u Where u.username=?1", User.class);
-
         return query.setParameter(1, string).getResultList();
     }
 }
