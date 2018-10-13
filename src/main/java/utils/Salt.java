@@ -10,7 +10,6 @@ public class Salt {
     private Salt() {
     }
 
-
     public static String salter(String string) {
 
         return PRE + string + POST;

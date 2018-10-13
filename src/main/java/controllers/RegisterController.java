@@ -2,6 +2,7 @@ package controllers;
 
 import beans.UserRepository;
 import model.User;
+import utils.Salt;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -24,7 +25,7 @@ public class RegisterController extends HttpServlet {
         String password = req.getParameter("password");
         String role = req.getParameter("role");
 
-        User user = new User(username, password, role);
+        User user = new User(username, Salt.salter(password), role);
         repository.add(user);
         resp.sendRedirect(req.getContextPath());
 
